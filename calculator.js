@@ -2,6 +2,7 @@ let mainNum = '0';
 
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
+const mainResult = document.getElementById('MainResult');
 const buttons = document.getElementsByClassName('Number');
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener('click', addToMainNum);
@@ -13,4 +14,5 @@ function addToMainNum(e) {
   } else {
     mainNum += e.target.textContent;
   }
+  mainResult.textContent = mainNum;
 }
