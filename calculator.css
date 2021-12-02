@@ -10,6 +10,10 @@ button {
   border: 3px solid black;
 }
 
+button:hover {
+  background-color: rgb(171, 228, 138);
+}
+
 .Calculator {
   display: grid;
   grid-template: 1.5fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
@@ -55,7 +59,15 @@ button {
   background-color: lightblue;
 }
 
+#clear:hover {
+  background-color: rgb(145, 184, 197);
+}
+
 #delete {
   grid-area: 2/3/3/5;
   background-color: red;
+}
+
+#delete:hover {
+  background-color: rgb(223, 33, 33);
 }
