@@ -1,16 +1,25 @@
+let prevNum = '';
+let currentOperator = '';
 let mainNum = '0';
 
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
+const prevResult = document.getElementById('PrevResult');
 const mainResult = document.getElementById('MainResult');
 const dotBtn = document.getElementById('dot');
 const buttons = document.getElementsByClassName('Number');
+const operatorButtons = document.getElementsByClassName('Operator');
+const resultBtn = document.getElementById('equals');
 
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener('click', (e) => addToMainNum(e.target.textContent));
 }
+for (let i = 0; i < operatorButtons.length; i++) {
+  operatorButtons[i].addEventListener('click', (e) => changeOperator(e.target.textContent));
+}
 document.addEventListener('keydown', checkKeyPress);
 dotBtn.addEventListener('click', addDot);
+resultBtn.addEventListener('click', solve);
 
 function addToMainNum(number) {
   if (mainNum === '0') {
@@ -18,7 +27,7 @@ function addToMainNum(number) {
   } else {
     mainNum += number;
   }
-  mainResult.textContent = mainNum;
+  refreshScreen();
 }
 
 function addDot() {
@@ -29,7 +38,49 @@ function addDot() {
   }
 
   mainNum += '.';
-  mainResult.textContent = mainNum;
+  refreshScreen();
+}
+
+function changeOperator(newOperator) {
+  if (mainNum && !prevNum) {
+    prevNum = mainNum;
+    mainNum = '';
+    currentOperator = newOperator;
+  }
+  if (mainNum && prevNum) {
+    solve();
+    prevNum = mainNum;
+    mainNum = '';
+    currentOperator = newOperator;
+  }
+  if (prevNum && !mainNum) {
+    currentOperator = newOperator;
+  }
+  refreshScreen();
+}
+
+function solve() {
+  if (prevNum && mainNum) {
+    const num1 = parseFloat(prevNum);
+    const num2 = parseFloat(mainNum);
+    let result;
+    if (currentOperator === '+') {
+      result = num1 + num2;
+    }
+    if (currentOperator === '-') {
+      result = num1 - num2;
+    }
+    if (currentOperator === 'x' || currentOperator === '*') {
+      result = num1 * num2;
+    }
+    if (currentOperator === '÷' || currentOperator === '/') {
+      result = num1 / num2;
+    }
+    currentOperator = '';
+    prevNum = '';
+    mainNum = result;
+    refreshScreen();
+  }
 }
 
 function checkKeyPress(e) {
@@ -41,4 +92,9 @@ function checkKeyPress(e) {
   if (e.key === '.') {
     addDot();
   }
+}
+
+function refreshScreen() {
+  prevResult.textContent = prevNum;
+  mainResult.textContent = mainNum;
 }
