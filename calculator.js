@@ -94,6 +94,12 @@ function checkKeyPress(e) {
   if (e.key === '.') {
     addDot();
   }
+  if (e.key === 'Enter' || e.key === '=') {
+    solve();
+  }
+  if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+    changeOperator(e.key);
+  }
 }
 
 function refreshScreen() {
