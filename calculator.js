@@ -5,6 +5,7 @@ let mainNum = '0';
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 const prevResult = document.getElementById('PrevResult');
+const currOperatorWindow = document.getElementById('CurrentOperator');
 const mainResult = document.getElementById('MainResult');
 const dotBtn = document.getElementById('dot');
 const buttons = document.getElementsByClassName('Number');
@@ -22,7 +23,8 @@ dotBtn.addEventListener('click', addDot);
 resultBtn.addEventListener('click', solve);
 
 function addToMainNum(number) {
-  if (mainNum === '0') {
+  console.log(mainNum)
+  if (mainNum == '0') {
     mainNum = number;
   } else {
     mainNum += number;
@@ -96,5 +98,6 @@ function checkKeyPress(e) {
 
 function refreshScreen() {
   prevResult.textContent = prevNum;
+  currOperatorWindow.textContent = currentOperator;
   mainResult.textContent = mainNum;
 }

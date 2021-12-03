@@ -43,10 +43,16 @@ button:active {
   border: 3px solid black;
 }
 
+.CurrentOperator {
+  font-size: 16px;
+  text-align: right;
+  overflow-wrap: break-word;
+  width: 100%;
+} 
+
 .PrevResult {
   font-size: 16px;
   text-align: right;
-  margin-bottom: 20px;
   overflow-wrap: break-word;
   width: 100%;
 }
