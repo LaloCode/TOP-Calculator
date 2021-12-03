@@ -23,6 +23,7 @@ document.addEventListener('keydown', checkKeyPress);
 dotBtn.addEventListener('click', addDot);
 resultBtn.addEventListener('click', solve);
 clearBtn.addEventListener('click', clearAll);
+deleteBtn.addEventListener('click', deleteLast);
 
 function clearAll() {
   prevNum = '';
@@ -30,6 +31,13 @@ function clearAll() {
   mainNum = '0';
   finishedOperation = false;
   refreshScreen();
+}
+
+function deleteLast() {
+  if (mainNum != '0' && mainNum && !finishedOperation) {
+    mainNum = mainNum.substring(0, mainNum.length - 1);
+    refreshScreen();
+  }
 }
 
 function addToMainNum(number) {
@@ -97,8 +105,8 @@ function solve() {
 }
 
 function checkKeyPress(e) {
-  e.preventDefault();
   if (e.key === 'Enter' || e.key === '=') {
+    e.preventDefault();
     solve();
   }
   if (/^[0-9]$/i.test(e.key)) {
@@ -109,6 +117,9 @@ function checkKeyPress(e) {
   }
   if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
     changeOperator(e.key);
+  }
+  if (e.key === 'Backspace') {
+    deleteLast();
   }
 }
 
