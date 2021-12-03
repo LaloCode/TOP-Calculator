@@ -22,9 +22,17 @@ for (let i = 0; i < operatorButtons.length; i++) {
 document.addEventListener('keydown', checkKeyPress);
 dotBtn.addEventListener('click', addDot);
 resultBtn.addEventListener('click', solve);
+clearBtn.addEventListener('click', clearAll);
+
+function clearAll() {
+  prevNum = '';
+  currentOperator = '';
+  mainNum = '0';
+  finishedOperation = false;
+  refreshScreen();
+}
 
 function addToMainNum(number) {
-  console.log(mainNum)
   if (mainNum == '0' || finishedOperation) {
     mainNum = number;
   } else {
@@ -89,16 +97,15 @@ function solve() {
 }
 
 function checkKeyPress(e) {
-  console.log(e.key);
-
+  e.preventDefault();
+  if (e.key === 'Enter' || e.key === '=') {
+    solve();
+  }
   if (/^[0-9]$/i.test(e.key)) {
     addToMainNum(e.key);
   }
   if (e.key === '.') {
     addDot();
-  }
-  if (e.key === 'Enter' || e.key === '=') {
-    solve();
   }
   if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
     changeOperator(e.key);
