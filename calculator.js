@@ -1,6 +1,7 @@
 let prevNum = '';
 let currentOperator = '';
 let mainNum = '0';
+let finishedOperation = false;
 
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
@@ -24,11 +25,12 @@ resultBtn.addEventListener('click', solve);
 
 function addToMainNum(number) {
   console.log(mainNum)
-  if (mainNum == '0') {
+  if (mainNum == '0' || finishedOperation) {
     mainNum = number;
   } else {
     mainNum += number;
   }
+  finishedOperation = false;
   refreshScreen();
 }
 
@@ -81,6 +83,7 @@ function solve() {
     currentOperator = '';
     prevNum = '';
     mainNum = result;
+    finishedOperation = true;
     refreshScreen();
   }
 }
