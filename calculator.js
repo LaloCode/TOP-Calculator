@@ -5,14 +5,23 @@ const deleteBtn = document.getElementById('delete');
 const mainResult = document.getElementById('MainResult');
 const buttons = document.getElementsByClassName('Number');
 for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener('click', addToMainNum);
+  buttons[i].addEventListener('click', (e) => addToMainNum(e.target.textContent));
 }
 
-function addToMainNum(e) {
+document.addEventListener('keydown', checkKeyPress);
+
+function addToMainNum(number) {
   if (mainNum === '0') {
-    mainNum = e.target.textContent;
+    mainNum = number;
   } else {
-    mainNum += e.target.textContent;
+    mainNum += number;
   }
   mainResult.textContent = mainNum;
+}
+
+function checkKeyPress(e) {
+  console.log(e.key);
+  if (/^[0-9]$/i.test(e.key)) {
+    addToMainNum(e.key);
+  }
 }
