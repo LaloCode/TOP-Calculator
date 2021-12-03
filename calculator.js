@@ -29,6 +29,7 @@ function addDot() {
   }
 
   mainNum += '.';
+  mainResult.textContent = mainNum;
 }
 
 function checkKeyPress(e) {
